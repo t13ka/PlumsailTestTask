@@ -1,0 +1,28 @@
+<table class="table table-hover">
+  <tbody>
+    <th>Notes</th>
+    <th>Color</th>
+    <th>Email</th>
+    <th>Quantity</th>
+    <th>Shipping On</th>
+    <tr *ngFor="let entity of entities">
+      <td>
+        {{ entity.Notes }}
+      </td>
+      <td>
+        {{ entity.Color }}
+      </td>
+      <td>
+        {{ entity.Email }}
+      </td>
+      <td>
+        {{ entity.Quantity }}
+      </td>
+      <td>
+        <div *ngIf="entity.Shipping">
+          {{ entity.ShippingDate }}
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

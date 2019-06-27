@@ -1,0 +1,89 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">New entity</h4>
+  <button type="button" class="close" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="form" novalidate (ngSubmit)="submit()">
+    <div class="form-group">
+      <label for="quantity">Quantity</label>
+      <input
+        class="form-control"
+        name="quantity"
+        type="number"
+        formControlName="Quantity"
+      />
+      <div
+        class="alert alert-danger mt-2"
+        *ngIf="form.controls.Quantity.invalid && form.controls.Quantity.touched"
+      >
+        Wrong quantity
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input class="form-control" name="email" formControlName="Email" />
+      <div
+        class="alert alert-danger mt-2"
+        *ngIf="form.controls.Email.invalid && form.controls.Email.touched"
+      >
+        Wrong email format
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="color">Color</label>
+
+      <select class="form-control" name="color" formControlName="Color">
+        <option>green</option>
+        <option>red</option>
+        <option>blue</option>
+      </select>
+
+      <div
+        class="alert alert-danger mt-2"
+        *ngIf="form.controls.Color.invalid && form.controls.Color.touched"
+      >
+        Wrong color
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="notes">Notes</label>
+      <textarea class="form-control" name="notes" formControlName="Notes">
+      </textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="shape">Shipping</label>
+      <br />
+      <ui-switch formControlName="Shipping" #shipping_toggle></ui-switch>
+    </div>
+
+    <div *ngIf="shipping_toggle.checked">
+      <div class="form-group">
+        <label for="shippingDate">Shipping Date</label>
+        <input
+          type="date"
+          name="shippingDate"
+          [min]="getTodayDate()"
+          [max]="getMaxShippingDate()"
+          class="form-control"
+          formControlName="ShippingDate"
+        />
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-success"
+    (click)="submit()"
+    [disabled]="!form.valid"
+  >
+    Save
+  </button>
+</div>
